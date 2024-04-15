@@ -4,13 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-  branches:
-    exclude:
-      - main
-  tags:
-    include:
-      - v1.*
-      - v2.*
+- main
 
 pool: default
 
