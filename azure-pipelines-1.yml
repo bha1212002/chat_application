@@ -26,7 +26,6 @@ steps:
 - task: Npm@1
   inputs:
     command: 'publish'
-    workingDir: '/home/einfochips/mypipe/_work/7/s/'
     publishRegistry: 'useFeed'
     publishFeed: '974bcf44-2fa8-4468-943e-10a4c93d77e1/3d7b2cea-92b1-459a-9d7f-7d5d8577a294'
 
