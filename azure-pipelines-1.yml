@@ -25,9 +25,18 @@ steps:
     MaxArtifactSize: 1
 - task: Npm@1
   inputs:
+    command: 'install'
+- task: Npm@1
+  inputs:
     command: 'publish'
     publishRegistry: 'useFeed'
     publishFeed: '974bcf44-2fa8-4468-943e-10a4c93d77e1/3d7b2cea-92b1-459a-9d7f-7d5d8577a294'
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: '/home/einfochips/mypipe/_work/7/s/'
+    customRegistry: 'useFeed'
+    customFeed: '974bcf44-2fa8-4468-943e-10a4c93d77e1/3d7b2cea-92b1-459a-9d7f-7d5d8577a294'
 
 
 - script: |
