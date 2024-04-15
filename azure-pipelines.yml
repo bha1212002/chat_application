@@ -4,25 +4,37 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+  branches:
+    include:
+      - main
+  tags:
+    include:
+      - v1.*
+      - v2.*
 
-pool: Default
+pool: default
 
 steps:
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
+
+- task: CopyFiles@2
+  inputs:
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+    MaxArtifactSize: 1
 
 - script: |
     # Copy React app files to Node.js project directory
-    cp -r /home/einfochips/mypipe/_work/6/s/* .
-    ls -la /home/einfochips/mypipe/_work/6/s/* .
+    ls -la /home/einfochips/mypipe/_work/7/s/*
+    cp -r /home/einfochips/mypipe/_work/7/s/* .
     
     # Install Node.js and React dependencies
     npm install
@@ -30,3 +42,11 @@ steps:
     # Build React app
     npm run build
   displayName: 'Copy React app, npm install, and build'
+
+
+- task: Npm@1
+  inputs:
+    command: 'publish'
+    workingDir: '$(Build.SourcesDirectory)'  # Assuming the React app is in the root directory
+    customEndpoint: 'myAzureDevOps'
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/tags'))
