@@ -13,12 +13,23 @@ steps:
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
+
+- task: CopyFiles@2
+  inputs:
+    targetFolder: '$(Build.ArtifactStagingDirectory)'    
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
     MaxArtifactSize: 1
+- task: Npm@1
+  inputs:
+    command: 'publish'
+    workingDir: '/home/einfochips/mypipe/_work/7/s/'
+    publishRegistry: 'useFeed'
+    publishFeed: '974bcf44-2fa8-4468-943e-10a4c93d77e1/f91ee60f-d76f-44ce-8bab-e70d4e0ad6bf'
+
 
 - script: |
     # Copy React app files to Node.js project directory
