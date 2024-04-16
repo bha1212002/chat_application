@@ -11,7 +11,7 @@
 #     exclude:
 #       - main
 trigger:
-  - azure-pipe
+  - main
 
 pool: default
 
