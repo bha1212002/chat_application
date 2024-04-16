@@ -16,6 +16,10 @@ trigger:
 pool: default
 
 steps:
+- script: |
+    git -c http.extraheader="AUTHORIZATION: bearer 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" fetch --force --tags --prune --prune-tags --progress --no-recurse-submodules origin --depth=1
+  displayName: 'Git fetch with PAT for authentication'
+
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
