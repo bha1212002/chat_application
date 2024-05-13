@@ -33,8 +33,8 @@ steps:
 
 - script: |
     # Copy React app files to Node.js project directory
-    ls -la /home/einfochips/mypipe/_work/7/s/*
-    cp -r /home/einfochips/mypipe/_work/7/s/* .
+    ls -la /home/einfochips/nodepipe/_work/1/s/*
+    cp -r /home/einfochips/nodepipe/_work/1/s/* .
     
     # Install Node.js and React dependencies
     npm install
