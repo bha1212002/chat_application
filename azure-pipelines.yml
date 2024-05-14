@@ -3,7 +3,7 @@ trigger:
     include:
       - v1.*
   branches:
-    include:
+    exclude:
       - main
  
 pool: Default
