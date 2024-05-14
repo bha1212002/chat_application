@@ -41,6 +41,6 @@ steps:
 - task: Npm@1
   inputs:
     command: 'publish'
-    workingDir: '$(Build.SourcesDirectory)'  # Assuming the React app is in the root directory
-    customEndpoint: 'myAzureDevOps'
+    publishRegistry: 'useFeed'
+    publishFeed: '974bcf44-2fa8-4468-943e-10a4c93d77e1/3d7b2cea-92b1-459a-9d7f-7d5d8577a294'
   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/tags'))
