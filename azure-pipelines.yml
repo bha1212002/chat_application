@@ -1,9 +1,9 @@
 trigger:
   tags:
     include:
-      - '*'
+      - v1.*
   branches:
-    exclude:
+    include:
       - main
  
 pool: Default
