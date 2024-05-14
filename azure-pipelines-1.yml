@@ -3,12 +3,23 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+# trigger:
+#   tags:
+#     include:
+#       - '*'
+#   branches:
+#     exclude:
+#       - main
 trigger:
-- main
+  - main
 
 pool: hellopipe
 
 steps:
+- script: |
+    git -c http.extraheader="AUTHORIZATION: bearer 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" fetch --force --tags --prune --prune-tags --progress --no-recurse-submodules origin --depth=1
+  displayName: 'Git fetch with PAT for authentication'
+
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
@@ -25,9 +36,13 @@ steps:
     MaxArtifactSize: 1
 - task: Npm@1
   inputs:
+    command: 'install'
+- task: Npm@1
+  condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+  inputs:
     command: 'publish'
     publishRegistry: 'useFeed'
-    publishFeed: '974bcf44-2fa8-4468-943e-10a4c93d77e1/3d7b2cea-92b1-459a-9d7f-7d5d8577a294'
+    publishFeed: '974bcf44-2fa8-4468-943e-10a4c93d77e1/71bca7ae-7da7-4a94-bcbe-e78837bbf274'
 
 
 - script: |
