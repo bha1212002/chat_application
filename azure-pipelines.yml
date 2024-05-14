@@ -25,13 +25,13 @@ steps:
  
 - bash: |
     # Check if the change is a tag or branch
-    if [ "$(git tag --contains $Build.SourceVersion)" ]; then
+    if [ "$(git tag --contains $Build_SourceVersion)" ]; then
       tag=$(git describe --tags --abbrev=0)
       sed -i "s/\"version\": \".*\"/\"version\": \"$tag\"/" package.json
       echo "tag is $tag"
     else
       # If it's a branch change, set the version to "1.0.0-CI-{BuildID}"
-      version="1.0.0-CI-$(Build.BuildId)"
+      version="1.0.0-CI-$(Build_BuildId)"
       # Update the version number in package.json
       sed -i "s/\"version\": \".*\"/\"version\": \"$version\"/" package.json
       echo "version is $version"
